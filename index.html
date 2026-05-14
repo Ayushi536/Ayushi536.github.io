@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ayushi Sharma — AI & ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #08090f;
+    --bg2: #0e0f1a;
+    --bg3: #13152a;
+    --glass: rgba(255,255,255,0.04);
+    --glass-border: rgba(180,140,255,0.18);
+    --glass-hover: rgba(255,255,255,0.07);
+    --purple: #a78bfa;
+    --purple-light: #c4b5fd;
+    --purple-dark: #7c3aed;
+    --purple-glow: rgba(167,139,250,0.15);
+    --text: #f0eeff;
+    --text-muted: #9b93b8;
+    --text-dim: #5c5475;
+    --nav-h: 68px;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BACKGROUND MESH */
+  body::before {
+    content:'';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(124,58,237,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 60% 40%, rgba(109,40,217,0.06) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(8,9,15,0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    z-index: 999;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--purple-light);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0.2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--purple-light);
+    background: var(--purple-glow);
+  }
+
+  /* PAGE SECTIONS */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: var(--nav-h);
+    position: relative;
+    z-index: 1;
+  }
+  .page.active { display: block; }
+
+  /* GLASS CARD */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .glass:hover {
+    background: var(--glass-hover);
+    border-color: rgba(167,139,250,0.3);
+  }
+
+  /* SECTION CONTAINER */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* ── HOME ── */
+  #home .container {
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+  }
+  .hero-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--purple-light);
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.25);
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.3px;
+  }
+  .hero-badge::before {
+    content:'';
+    width: 6px; height: 6px;
+    background: var(--purple);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.5;transform:scale(0.8)}
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .hero-name span {
+    background: linear-gradient(135deg, #a78bfa, #c4b5fd, #ddd6fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-role {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    background: var(--purple-dark);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover {
+    background: #6d28d9;
+    transform: translateY(-1px);
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    background: transparent;
+    color: var(--purple-light);
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(167,139,250,0.35);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-outline:hover {
+    background: var(--purple-glow);
+    border-color: var(--purple);
+  }
+  .hero-avatar {
+    width: 240px;
+    height: 240px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(167,139,250,0.1));
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--purple-light);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(167,139,250,0.2), transparent 60%);
+  }
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--purple-light);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  .about-card {
+    padding: 2rem;
+  }
+  .about-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--purple-light);
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
+  }
+  .about-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .soft-skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+  }
+  .skill-tag {
+    font-size: 0.78rem;
+    color: var(--purple-light);
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.2);
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    font-weight: 400;
+  }
+  .beyond-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .beyond-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .beyond-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .beyond-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .beyond-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card.flagship {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    background: rgba(167,139,250,0.15);
+    color: var(--purple-light);
+    border: 1px solid rgba(167,139,250,0.25);
+    align-self: flex-start;
+  }
+  .project-badge.hackathon {
+    background: rgba(245,158,11,0.1);
+    color: #fbbf24;
+    border-color: rgba(245,158,11,0.25);
+  }
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tech-chip {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .project-main { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+  .project-accent {
+    width: 180px;
+    min-height: 160px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.25), rgba(167,139,250,0.08));
+    border: 1px solid rgba(167,139,250,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    flex-shrink: 0;
+  }
+
+  /* ── SKILLS ── */
+  .skills-wrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .skill-group {
+    padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 1rem;
+  }
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+  }
+  .skill-dot {
+    width: 6px; height: 6px;
+    background: var(--purple);
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .edu-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--purple), transparent);
+  }
+  .edu-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .edu-dot {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--bg3);
+    border: 2px solid var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+    position: relative;
+    margin-top: 4px;
+  }
+  .edu-dot-inner {
+    width: 8px; height: 8px;
+    background: var(--purple);
+    border-radius: 50%;
+  }
+  .edu-card {
+    padding: 1.5rem;
+  }
+  .edu-year {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--purple);
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+  .edu-school {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .edu-degree {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .edu-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .edu-chip {
+    font-size: 0.75rem;
+    color: var(--purple-light);
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .cert-card {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .cert-provider {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--purple);
+  }
+  .cert-name {
+    font-size: 0.88rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ── ACHIEVEMENTS ── */
+  .achieve-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .achieve-card {
+    padding: 2rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .achieve-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: rgba(167,139,250,0.12);
+    border: 1px solid rgba(167,139,250,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .achieve-body h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  .achieve-body p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .contact-info { padding: 2rem; }
+  .contact-info h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-decoration: none;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+  }
+  .contact-text { font-size: 0.88rem; color: var(--text-muted); }
+  .contact-label { font-size: 0.7rem; color: var(--text-dim); }
+  .contact-form { padding: 2rem; }
+  .contact-form h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0.65rem 0.9rem;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--purple);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder {
+    color: var(--text-dim);
+  }
+
+  /* FOOTER NAV BOTTOM */
+  .page-footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo" onclick="showPage('home')">AS</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a href="#" onclick="showPage('projects')" id="nav-projects">Projects</a></li>
+    <li><a href="#" onclick="showPage('skills')" id="nav-skills">Skills</a></li>
+    <li><a href="#" onclick="showPage('education')" id="nav-education">Education</a></li>
+    <li><a href="#" onclick="showPage('achievements')" id="nav-achievements">Achievements</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ HOME ══════════════ -->
+<section class="page active" id="home">
+  <div class="container">
+    <div class="hero-wrap">
+      <div class="hero-left">
+        <div class="hero-badge">Available for Internships & Opportunities</div>
+        <h1 class="hero-name">Ayushi<br/><span>Sharma</span></h1>
+        <p class="hero-role">AI & ML Engineer · Full-Stack Developer · Chatbot & Automation Specialist</p>
+        <p class="hero-desc">Second-year B.Tech student at GLA University building intelligent, full-stack systems that solve real problems. I combine deep technical skill with a product mindset — I don't just build, I think about the user and the impact.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('projects')">View Projects →</button>
+          <button class="btn-outline" onclick="showPage('contact')">Get in Touch</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">6+</div>
+            <div class="stat-label">Production Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">8.34</div>
+            <div class="stat-label">Current GPA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">IIT</div>
+            <div class="stat-label">Roorkee Finalist</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">2028</div>
+            <div class="stat-label">Graduating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-avatar">AS</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section class="page" id="about">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <p class="section-sub">A builder, a thinker, and a problem-solver — passionate about creating technology that genuinely matters.</p>
+
+    <div class="about-grid">
+      <div class="glass about-card">
+        <h3>My Story</h3>
+        <p>I'm a second-year AI & ML Engineering student at GLA University, Mathura, with a GPA of 8.34. I've shipped production-ready projects across EdTech, student housing, women's safety, and automation. I combine strong technical depth with a product mindset and clear communication.</p>
+        <br/>
+        <p>From building an AI-powered PG transparency platform to a women's safety app with live location alerts — every project I take on, I think deeply about who it's for and why it matters.</p>
+      </div>
+      <div class="glass about-card">
+        <h3>Soft Skills</h3>
+        <div class="soft-skills-grid">
+          <span class="skill-tag">Fluent English</span>
+          <span class="skill-tag">Public Speaking</span>
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">Critical Thinking</span>
+          <span class="skill-tag">Analytical Thinking</span>
+          <span class="skill-tag">Fast Learner</span>
+          <span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Team Management</span>
+          <span class="skill-tag">Cross-functional Teamwork</span>
+          <span class="skill-tag">Calm Under Pressure</span>
+          <span class="skill-tag">Creative Problem Solving</span>
+          <span class="skill-tag">Time Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:3rem">Beyond Code</div>
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:0.5rem">Life Outside the Terminal</h2>
+    <p class="section-sub" style="margin-bottom:1.5rem">The habits and interests that shape how I think and work.</p>
+
+    <div class="beyond-grid">
+      <div class="glass beyond-card">
+        <div class="beyond-icon">🏐</div>
+        <h4>Sports & Fitness</h4>
+        <p>Volleyball, Badminton, Running, Chess & Carrom. Active sports build discipline, team spirit, and competitive fire — all things I bring to my work.</p>
+      </div>
+      <div class="glass beyond-card">
+        <div class="beyond-icon">⛩️</div>
+        <h4>Anime & Stories</h4>
+        <p>Anime taught me more about perseverance than most books. Storytelling shapes how I think about user experience and emotional design.</p>
+      </div>
+      <div class="glass beyond-card">
+        <div class="beyond-icon">🔧</div>
+        <h4>Hacking & Building</h4>
+        <p>Hackathons, open-source contribution, AI trends, Women in Tech, and content creation. I'm always building something new.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ PROJECTS ══════════════ -->
+<section class="page" id="projects">
+  <div class="container">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Production-ready systems across EdTech, safety, housing, and automation — each built with real users in mind.</p>
+
+    <div class="projects-grid">
+      <!-- Flagship -->
+      <div class="glass project-card flagship">
+        <div class="project-accent">🏠</div>
+        <div class="project-main">
+          <span class="project-badge">★ Flagship Project</span>
+          <h3 class="project-name">PGLens</h3>
+          <p class="project-desc">An AI-powered PG (Paying Guest) transparency platform using NLP for review analysis, Computer Vision for property verification, and a proprietary Fair Pricing engine. Designed to eliminate opacity in student housing and bring trust to tenants and landlords alike.</p>
+          <div class="project-tech">
+            <span class="tech-chip">Next.js</span>
+            <span class="tech-chip">Django</span>
+            <span class="tech-chip">PostgreSQL</span>
+            <span class="tech-chip">Docker</span>
+            <span class="tech-chip">NLP</span>
+            <span class="tech-chip">Computer Vision</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AskEdu -->
+      <div class="glass project-card">
+        <span class="project-badge hackathon">🏆 Hackathon Finalist</span>
+        <h3 class="project-name">AskEdu</h3>
+        <p class="project-desc">AI classroom assistant with Mentor Chat, personalized Weakness-Based Suggestions, and a Study Match Chatroom connecting students with similar learning gaps.</p>
+        <div class="project-tech">
+          <span class="tech-chip">React</span>
+          <span class="tech-chip">LLM Integration</span>
+          <span class="tech-chip">NLP</span>
+          <span class="tech-chip">Python</span>
+        </div>
+      </div>
+
+      <!-- NariCare -->
+      <div class="glass project-card">
+        <span class="project-badge">💜 Social Impact</span>
+        <h3 class="project-name">NariCare</h3>
+        <p class="project-desc">Women's safety app featuring live location alerts, an AI mental health chatbot, and a period tracker — built with empathy, designed for real-world safety scenarios.</p>
+        <div class="project-tech">
+          <span class="tech-chip">React Native</span>
+          <span class="tech-chip">Firebase</span>
+          <span class="tech-chip">AI Chatbot</span>
+          <span class="tech-chip">Geolocation</span>
+        </div>
+      </div>
+
+      <!-- Attendance -->
+      <div class="glass project-card">
+        <span class="project-badge">⚙️ Automation</span>
+        <h3 class="project-name">Attendance Management System</h3>
+        <p class="project-desc">Role-based automated attendance tracking system with report generation. Built on Django with multi-role access for students, faculty, and administrators.</p>
+        <div class="project-tech">
+          <span class="tech-chip">Django</span>
+          <span class="tech-chip">SQLite</span>
+          <span class="tech-chip">REST API</span>
+          <span class="tech-chip">Python</span>
+        </div>
+      </div>
+
+      <!-- CampusConnect -->
+      <div class="glass project-card">
+        <span class="project-badge">🎓 EdTech</span>
+        <h3 class="project-name">CampusConnect</h3>
+        <p class="project-desc">Student networking platform with notes sharing, team-finding for hackathons, and an automated Quiz Generator — a full campus ecosystem in one app.</p>
+        <div class="project-tech">
+          <span class="tech-chip">React</span>
+          <span class="tech-chip">Django</span>
+          <span class="tech-chip">PostgreSQL</span>
+          <span class="tech-chip">AI Quiz Gen</span>
+        </div>
+      </div>
+
+      <!-- MicroScript -->
+      <div class="glass project-card">
+        <span class="project-badge">🤖 Automation</span>
+        <h3 class="project-name">MicroScript Generator</h3>
+        <p class="project-desc">Python automation tool for auto-generating video scripts with customizable tone, structure, and content hooks — saving hours of creative writing for content creators.</p>
+        <div class="project-tech">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">LLM / Prompt Eng.</span>
+          <span class="tech-chip">Automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SKILLS ══════════════ -->
+<section class="page" id="skills">
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <p class="section-sub">A well-rounded toolkit spanning AI/ML, full-stack development, cloud, and developer tooling.</p>
+
+    <div class="skills-wrap">
+      <div class="glass skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Python</div>
+          <div class="skill-item"><span class="skill-dot"></span>JavaScript</div>
+          <div class="skill-item"><span class="skill-dot"></span>Java</div>
+          <div class="skill-item"><span class="skill-dot"></span>HTML / CSS</div>
+          <div class="skill-item"><span class="skill-dot"></span>SQL</div>
+        </div>
+      </div>
+      <div class="glass skill-group">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>React</div>
+          <div class="skill-item"><span class="skill-dot"></span>Next.js</div>
+          <div class="skill-item"><span class="skill-dot"></span>Tailwind CSS</div>
+          <div class="skill-item"><span class="skill-dot"></span>Responsive Design</div>
+          <div class="skill-item"><span class="skill-dot"></span>Component Architecture</div>
+        </div>
+      </div>
+      <div class="glass skill-group">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Django</div>
+          <div class="skill-item"><span class="skill-dot"></span>REST APIs</div>
+          <div class="skill-item"><span class="skill-dot"></span>PostgreSQL</div>
+          <div class="skill-item"><span class="skill-dot"></span>SQLite</div>
+          <div class="skill-item"><span class="skill-dot"></span>Firebase</div>
+        </div>
+      </div>
+      <div class="glass skill-group">
+        <div class="skill-group-title">AI / ML</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>NLP</div>
+          <div class="skill-item"><span class="skill-dot"></span>LLM Integration</div>
+          <div class="skill-item"><span class="skill-dot"></span>Prompt Engineering</div>
+          <div class="skill-item"><span class="skill-dot"></span>Computer Vision</div>
+          <div class="skill-item"><span class="skill-dot"></span>Chatbot Development</div>
+        </div>
+      </div>
+      <div class="glass skill-group">
+        <div class="skill-group-title">DevOps & Tools</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Docker</div>
+          <div class="skill-item"><span class="skill-dot"></span>Git & GitHub</div>
+          <div class="skill-item"><span class="skill-dot"></span>Linux / CLI</div>
+          <div class="skill-item"><span class="skill-dot"></span>Postman</div>
+          <div class="skill-item"><span class="skill-dot"></span>VS Code</div>
+        </div>
+      </div>
+      <div class="glass skill-group">
+        <div class="skill-group-title">Specialisms</div>
+        <div class="skill-list">
+          <div class="skill-item"><span class="skill-dot"></span>Automation Scripting</div>
+          <div class="skill-item"><span class="skill-dot"></span>System Design</div>
+          <div class="skill-item"><span class="skill-dot"></span>Data Analytics</div>
+          <div class="skill-item"><span class="skill-dot"></span>API Design</div>
+          <div class="skill-item"><span class="skill-dot"></span>Product Thinking</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ EDUCATION ══════════════ -->
+<section class="page" id="education">
+  <div class="container">
+    <div class="section-label">Academic Journey</div>
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">A consistent academic track record from school to a specialized engineering program in AI and Data Analytics.</p>
+
+    <div class="edu-timeline" style="margin-bottom: 3rem;">
+      <div class="edu-item">
+        <div class="edu-dot"><div class="edu-dot-inner"></div></div>
+        <div class="glass edu-card">
+          <div class="edu-year">2024 – 2028 (Current)</div>
+          <div class="edu-school">GLA University, Mathura</div>
+          <div class="edu-degree">B.Tech (Hons.) in AI & Data Analytics</div>
+          <div class="edu-meta">
+            <span class="edu-chip">GPA: 8.34</span>
+            <span class="edu-chip">Honours</span>
+            <span class="edu-chip">Mathura, UP</span>
+          </div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot"><div class="edu-dot-inner"></div></div>
+        <div class="glass edu-card">
+          <div class="edu-year">Class XII · 2024</div>
+          <div class="edu-school">K.M.P.S School, Mathura</div>
+          <div class="edu-degree">Senior Secondary Education</div>
+          <div class="edu-meta">
+            <span class="edu-chip">84%</span>
+            <span class="edu-chip">Mathura, UP</span>
+          </div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot"><div class="edu-dot-inner"></div></div>
+        <div class="glass edu-card">
+          <div class="edu-year">Class X · 2022</div>
+          <div class="edu-school">R.L.P.K.D Senior Secondary School, Mathura</div>
+          <div class="edu-degree">Secondary Education</div>
+          <div class="edu-meta">
+            <span class="edu-chip">95%</span>
+            <span class="edu-chip">Mathura, UP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Certifications</div>
+    <h2 class="section-title" style="font-size:1.8rem; margin-bottom:1.5rem">Credentials</h2>
+    <div class="certs-grid">
+      <div class="glass cert-card">
+        <div class="cert-provider">NPTEL</div>
+        <div class="cert-name">Software Engineering</div>
+        <span class="skill-tag" style="align-self:flex-start">Elite</span>
+      </div>
+      <div class="glass cert-card">
+        <div class="cert-provider">Coursera</div>
+        <div class="cert-name">Python for Data Science, AI & Development</div>
+        <span class="skill-tag" style="align-self:flex-start">Completed</span>
+      </div>
+      <div class="glass cert-card">
+        <div class="cert-provider">Coursera</div>
+        <div class="cert-name">Database Integration and Management</div>
+        <span class="skill-tag" style="align-self:flex-start">Completed</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ACHIEVEMENTS ══════════════ -->
+<section class="page" id="achievements">
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Achievements</h2>
+    <p class="section-sub">Competed at national levels, shipped real products, and earned recognition for impact — not just ideas.</p>
+
+    <div class="achieve-grid">
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">🏛️</div>
+        <div class="achieve-body">
+          <h3>IIT Roorkee Productathon Finalist</h3>
+          <p>Selected as a finalist at the prestigious IIT Roorkee Productathon — one of India's most competitive product-building competitions, competing against teams from top engineering colleges nationwide.</p>
+        </div>
+      </div>
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">🏆</div>
+        <div class="achieve-body">
+          <h3>Multi-Hackathon Finalist</h3>
+          <p>Reached the finals of multiple hackathons, consistently building products that stand out for technical depth, real-world applicability, and user impact. AskEdu is a notable finalist project.</p>
+        </div>
+      </div>
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">🎓</div>
+        <div class="achieve-body">
+          <h3>Elite Certification — NPTEL</h3>
+          <p>Earned Elite distinction in Software Engineering through NPTEL, the prestigious national programme administered by IITs and IISc — placing in the top tier of participants nationwide.</p>
+        </div>
+      </div>
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">📊</div>
+        <div class="achieve-body">
+          <h3>8.34 GPA — Semester Consistency</h3>
+          <p>Maintaining a strong academic GPA of 8.34 at GLA University while simultaneously shipping production-grade projects, competing in hackathons, and contributing to open-source.</p>
+        </div>
+      </div>
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">🛡️</div>
+        <div class="achieve-body">
+          <h3>NariCare — Social Impact Project</h3>
+          <p>Built and shipped a women's safety platform with real-time location alerts and AI mental health support — addressing a genuine, critical gap in safety technology for women in India.</p>
+        </div>
+      </div>
+      <div class="glass achieve-card">
+        <div class="achieve-icon-wrap">🚀</div>
+        <div class="achieve-body">
+          <h3>6+ Production-Ready Projects</h3>
+          <p>Shipped over six production-grade projects across diverse domains — EdTech, women's safety, student housing, and automation — as a second-year engineering student.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section class="page" id="contact">
+  <div class="container">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-sub">Open to internships, collaborations, and exciting opportunities. Let's build something together.</p>
+
+    <div class="contact-wrap">
+      <div class="glass contact-info">
+        <h3>Contact Details</h3>
+        <a class="contact-item" href="tel:+917983185890">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-text">+91 7983185890</div>
+            <div class="contact-label">Phone</div>
+          </div>
+        </a>
+        <a class="contact-item" href="mailto:ayu704sharma32@gmail.com">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-text">ayu704sharma32@gmail.com</div>
+            <div class="contact-label">Email</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://linkedin.com/in/ayushi-sharma32" target="_blank">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-text">linkedin.com/in/ayushi-sharma32</div>
+            <div class="contact-label">LinkedIn</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://github.com/Ayushi536" target="_blank">
+          <div class="contact-icon">💻</div>
+          <div>
+            <div class="contact-text">github.com/Ayushi536</div>
+            <div class="contact-label">GitHub</div>
+          </div>
+        </a>
+        <a class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-text">Mathura, Uttar Pradesh, India</div>
+            <div class="contact-label">Location</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="glass contact-form">
+        <h3>Send a Message</h3>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Jane Smith"/>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@company.com"/>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Internship Opportunity / Collaboration"/>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about the opportunity…"></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%; justify-content:center;" onclick="alert('Thanks! Reach out directly at ayu704sharma32@gmail.com')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    © 2025 Ayushi Sharma · Built with passion in Mathura, India
+  </div>
+</section>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo(0,0);
+  return false;
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+</script>
+</body>
+</html>
